@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: sentence_transformers_app
+    command: /bin/bash  # pythonスクリプト実行ではなく、シェルを起動
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
