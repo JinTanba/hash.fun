@@ -9,7 +9,9 @@ def compute_embedding(text):
     """
     Compute the continuous embedding for a given text using Sentence-BERT.
     """
-    return model.encode(text)
+    encoded = model.encode(text)
+    print(">>>> compute_embedding >>>>>",encoded)
+    return encoded
 
 def binarize_embedding(embedding, threshold=0.0):
     """
@@ -23,6 +25,7 @@ def binarize_embedding(embedding, threshold=0.0):
     - A binary numpy array (vector) representing the hash code.
     """
     binary_code = (embedding > threshold).astype(int)
+    print(">>>> binarize_embedding >>>>>",binary_code)
     return binary_code
 
 def compute_hash(text, threshold=0.0):
@@ -114,9 +117,9 @@ if __name__ == '__main__':
     print(hash1InHash)
 
     hash2 = compute_hash(text2)
-    print(hash2)
+    # print(hash2)
     hash3 = compute_hash(text3)
-    print(hash3)
+    # print(hash3)
     hash1 = str_to_hash(hash1)
     # Compute similarities
     hamming_dist_1_2 = compute_hamming_distance(hash1, hash2)
@@ -129,14 +132,3 @@ if __name__ == '__main__':
     print("Hamming distance between text1 and text3:", hamming_dist_1_3)
     print("Jaccard similarity between text1 and text2:", jaccard_sim_1_2)
     print("Jaccard similarity between text1 and text3:", jaccard_sim_1_3)
-    # [1 1 1 1 1 0 0 0 0 1 1 1 0 0 1 0 0 0 1 0 0 0 1 1 0 0 0 0 1 0 0 1 0 1 0 0 1
-    #  1 1 1 1 0 0 1 0 1 0 0 1 1 0 0 1 1 1 0 0 0 1 0 1 1 1 1 1 1 0 0 0 0 1 0 0 1
-    #  1 0 1 0 1 1 0 0 0 1 1 1 1 1 0 0 0 0 0 1 1 1 1 0 0 0 1 1 1 1 0 0 0 1 1 1 0
-    #  0 0 1 1 1 0 0 0 0 1 1 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 1 1
-    #  1 1 0 0 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 1 0 1 1 1 0 0 1 1 0 1 0 1 1 0 0 1 1
-    #  0 0 1 1 0 1 0 1 0 0 1 0 1 1 1 1 0 1 0 1 0 1 0 1 0 0 1 0 1 1 1 0 0 0 0 1 0
-    #  1 1 1 0 1 1 0 1 0 1 0 1 0 1 0 0 1 1 1 0 1 1 0 1 1 1 1 1 1 0 0 0 0 0 1 0 1
-    #  1 0 0 0 0 1 0 1 1 1 1 0 1 0 1 0 1 1 1 0 0 1 0 1 0 1 1 1 0 0 0 0 0 1 0 0 1
-    #  1 0 1 1 1 1 1 0 1 0 0 1 0 1 0 1 1 0 1 1 1 1 0 0 0 1 0 1 1 1 0 1 1 0 1 1 1
-    #  1 0 1 0 1 1 1 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 1 1 0 1 1 1 1 0 0 0 0 0 0 1 0
-    #  0 0 1 1 0 0 0 0 0 1 1 1 1 1]
